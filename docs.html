@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Editor — Описание | Koshey-Developer</title>
+    <link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="banner-content">
+            <div class="banner-logo">
+                <span class="logo-symbol">{<span class="logo-letter">K</span>}</span>
+                <div class="logo-text">
+                    <span class="logo-title">K - Editor</span>
+                    <span class="logo-subtitle">Koshey Developer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="docs-wrapper">
+        <div class="docs-content">
+
+            <h1 class="docs-title">Описание проекта</h1>
+            <p class="docs-subtitle">Полная документация по K-Editor</p>
+
+            <!-- Overview -->
+            <div class="docs-section">
+                <h2 class="docs-heading">Обзор</h2>
+                <div class="docs-card">
+                    <p>K-Editor — это WYSIWYG-редактор на основе <code>contentEditable</code>. Цветовая схема — тёмный оливковый + золото.</p>
+                    <p>Редактор работает полностью автономно — все стили, скрипты и иконки локально, без внешних зависимостей. PHP-часть нужна только для сохранения документов на сервере.</p>
+                </div>
+            </div>
+
+            <!-- Architecture -->
+            <div class="docs-section">
+                <h2 class="docs-heading">Архитектура</h2>
+                <div class="docs-card docs-code">
+┌──────────────────────────────────────────────────────────┐
+│                    index.html                            │
+│  ┌─────────────────────────────────────────────────────┐ │
+│  │  Banner  —  {K} K-Editor / Koshey Developer        │ │
+│  └─────────────────────────────────────────────────────┘ │
+│  ┌─────────────────────────────────────────────────────┐ │
+│  │  Toolbar —  кнопки форматирования (execCommand)     │ │
+│  └─────────────────────────────────────────────────────┘ │
+│  ┌──────┬──────────┬──────────┐                         │
+│  │Editor│ Preview  │   HTML   │  ← вкладки              │
+│  ├──────┴──────────┴──────────┤                         │
+│  │   [contenteditable div]    │  ← пользователь пишет   │
+│  └────────────────────────────┘                         │
+│  ┌────────────────────────────┐                         │
+│  │  Status Bar — слова/символы│                         │
+│  └────────────────────────────┘                         │
+│  ┌────────────────────────────┐                         │
+│  │  Сохранить | Очистить | ?  │  ← кнопки действия      │
+│  └────────────────────────────┘                         │
+│  ┌────────────────────────────┐                         │
+│  │  Koshey-Developer © 2011   │  ← футер               │
+│  └────────────────────────────┘                         │
+└──────────────────────────────────────────────────────────┘
+        │
+        ├── css/editor.css    ← стили (тёмная тема, 1430 полк)
+        ├── css/icons.css     ← иконки toolbar (Unicode, без шрифтов)
+        ├── js/editor.js      ← класс KEditor (вся логика)
+        ├── api/save.php      ← PHP API сохранения в MySQL
+        ├── demo/index.php    ← страница демонстрации
+        └── MySQL: keditor     ← база данных (таблица documents)</div>
+            </div>
+
+            <!-- File structure -->
+            <div class="docs-section">
+                <h2 class="docs-heading">Структура файлов</h2>
+                <div class="docs-card">
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th>Файл</th>
+                                <th>Тип</th>
+                                <th>Описание</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>index.html</code></td>
+                                <td>HTML</td>
+                                <td>Основной файл редактора. Открыть в браузере — работает сразу без сервера.</td>
+                            </tr>
+                            <tr>
+                                <td><code>docs.html</code></td>
+                                <td>HTML</td>
+                                <td>Эта страница — описание проекта и документация.</td>
+                            </tr>
+                            <tr>
+                                <td><code>css/editor.css</code></td>
+                                <td>CSS</td>
+                                <td>Все стили: тёмная тема, кнопки, toolbar, модальные окна, адаптивность.</td>
+                            </tr>
+                            <tr>
+                                <td><code>css/icons.css</code></td>
+                                <td>CSS</td>
+                                <td>Иконки toolbar через Unicode символы. Без внешних шрифтов.</td>
+                            </tr>
+                            <tr>
+                                <td><code>js/editor.js</code></td>
+                                <td>JS</td>
+                                <td>Класс KEditor — вся логика: toolbar, tabs, hotkeys, загрузка файлов, toast, сохранение.</td>
+                            </tr>
+                            <tr>
+                                <td><code>api/save.php</code></td>
+                                <td>PHP</td>
+                                <td><strong>Серверная часть.</strong> API для сохранения/загрузки/удаления документов в MySQL. Принимает POST (JSON), возвращает JSON.</td>
+                            </tr>
+                            <tr>
+                                <td><code>demo/index.php</code></td>
+                                <td>PHP</td>
+                                <td><strong>Серверная часть.</strong> Страница демонстрации — рендерит сохранённые HTML-документы в красивую страницу с сайдбаром.</td>
+                            </tr>
+                            <tr>
+                                <td><code>keditor</code></td>
+                                <td>MySQL</td>
+                                <td>База данных. Таблица <code>documents</code> создаётся автоматически при первом сохранении.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PHP Files -->
+            <div class="docs-section">
+                <h2 class="docs-heading">PHP-файлы (серверная часть)</h2>
+                <div class="docs-card">
+                    <p>PHP-файлы нужны <strong>только для работы на сервере</strong> с поддержкой PHP 7.4+ и модулем <code>pdo_mysql</code>. Без сервера редактор работает автономно — сохраняет в <code>localStorage</code> браузера.</p>
+
+                    <h3 class="docs-h3">api/save.php</h3>
+                    <p>REST API для работы с документами. Поддерживает три метода:</p>
+                    <table class="docs-table">
+                        <thead>
+                            <tr><th>Метод</th><th>Параметры</th><th>Описание</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>POST</code></td>
+                                <td><code>{ content, title, id? }</code></td>
+                                <td>Сохранить документ. Если <code>id</code> указан — обновить существующий.</td>
+                            </tr>
+                            <tr>
+                                <td><code>GET</code></td>
+                                <td><code>?id=N</code> (опционально)</td>
+                                <td>Получить документ по ID или список всех документов.</td>
+                            </tr>
+                            <tr>
+                                <td><code>DELETE</code></td>
+                                <td><code>{ id }</code></td>
+                                <td>Удалить документ по ID.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="docs-h3">demo/index.php</h3>
+                    <p>Страница демонстрации. Загружает документы из MySQL и отображает их в красивом формате:</p>
+                    <ul class="docs-list">
+                        <li>Сайдбар со списком всех документов</li>
+                        <li>Основная область с рендерингом HTML-контента</li>
+                        <li>Стили в том же стиле что и редактор (тёмный оливковый + золото)</li>
+                        <li>Ссылка на редактор для создания новых документов</li>
+                    </ul>
+
+                    <h3 class="docs-h3">MySQL база данных</h3>
+                    <p>База <code>keditor</code>, таблица <code>documents</code>. Создаётся автоматически. Структура:</p>
+                    <div class="docs-code">CREATE TABLE documents (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) DEFAULT 'Без названия',
+    content LONGTEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</div>
+                </div>
+            </div>
+
+            <!-- How to use -->
+            <div class="docs-section">
+                <h2 class="docs-heading">Как использовать</h2>
+                <div class="docs-card">
+                    <h3 class="docs-h3">Без сервера (локально)</h3>
+                    <p>Просто откройте <code>index.html</code> в браузере. Всё работает — форматирование, загрузка файлов, предпросмотр. Контент сохраняется в <code>localStorage</code>.</p>
+
+                    <h3 class="docs-h3">С сервером (PHP + MySQL)</h3>
+                    <ol class="docs-list">
+                        <li>Скопируйте папку <code>keditor</code> на сервер с PHP 7.4+ и MySQL</li>
+                        <li>Убедитесь что модуль <code>pdo_mysql</code> включён в php.ini</li>
+                        <li>Создайте базу данных <code>keditor</code> или используйте существующую (таблица создаётся автоматически)</li>
+                        <li>Отредактируйте данные подключения в <code>api/save.php</code> и <code>demo/index.php</code> (хост, пользователь, пароль, имя базы)</li>
+                        <li>Откройте <code>index.html</code> — при нажатии «Сохранить» данные отправятся на сервер</li>
+                        <li>Откройте <code>demo/index.php</code> — увидите сохранённые документы</li>
+                    </ol>
+
+                    <h3 class="docs-h3">Встроить в свой проект</h3>
+                    <div class="docs-code">&lt;!-- Подключить стили --&gt;
+&lt;link rel="stylesheet" href="keditor/css/editor.css"&gt;
+&lt;link rel="stylesheet" href="keditor/css/icons.css"&gt;
+
+&lt;!-- Вставить HTML редактора --&gt;
+&lt;div class="editor-container"&gt;
+    &lt;div class="toolbar"&gt;...&lt;/div&gt;
+    &lt;div id="editor" contenteditable="true"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Подключить JS --&gt;
+&lt;script src="keditor/js/editor.js"&gt;&lt;/script&gt;
+
+&lt;!-- Получить HTML --&gt;
+&lt;script&gt;
+const content = window.kEditor.editor.innerHTML;
+&lt;/script&gt;</div>
+                </div>
+            </div>
+
+            <!-- Hotkeys -->
+            <div class="docs-section">
+                <h2 class="docs-heading">Горячие клавиши</h2>
+                <div class="docs-card">
+                    <table class="docs-table">
+                        <thead>
+                            <tr><th>Клавиша</th><th>Действие</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><kbd>Ctrl+B</kbd></td><td>Жирный текст</td></tr>
+                            <tr><td><kbd>Ctrl+I</kbd></td><td>Курсив</td></tr>
+                            <tr><td><kbd>Ctrl+U</kbd></td><td>Подчёркивание</td></tr>
+                            <tr><td><kbd>Ctrl+K</kbd></td><td>Вставить ссылку</td></tr>
+                            <tr><td><kbd>Ctrl+S</kbd></td><td>Сохранить документ</td></tr>
+                            <tr><td><kbd>Ctrl+Z</kbd></td><td>Отменить</td></tr>
+                            <tr><td><kbd>Ctrl+Y</kbd></td><td>Повторить</td></tr>
+                            <tr><td><kbd>F11</kbd></td><td>Полный экран</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Browser support -->
+            <div class="docs-section">
+                <h2 class="docs-heading">Совместимость</h2>
+                <div class="docs-card">
+                    <p>Редактор использует стандартные API браузера:</p>
+                    <div class="docs-badges">
+                        <span class="docs-badge">Chrome 90+</span>
+                        <span class="docs-badge">Firefox 90+</span>
+                        <span class="docs-badge">Safari 14+</span>
+                        <span class="docs-badge">Edge 90+</span>
+                    </div>
+                    <p style="margin-top:12px;color:var(--text-muted);font-size:0.85rem">IE11 не поддерживается (CSS Grid, Flexbox, arrow functions).</p>
+                </div>
+            </div>
+
+            <!-- Back button -->
+            <div class="docs-section" style="text-align:center;padding:30px 0">
+                <a href="index.html" class="btn-action btn-save-action" style="text-decoration:none;display:inline-flex">
+                    Вернуться в редактор
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="editor-footer">
+        <div class="footer-content">
+            <a href="https://kosheydemo.info" target="_blank" rel="noopener" class="footer-link">Koshey-Developer</a>
+            <span class="footer-copy">&copy; 2011-2026. Все права защищены.</span>
+        </div>
+    </footer>
+
+</body>
+</html>

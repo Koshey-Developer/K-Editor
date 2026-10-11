@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Editor | Koshey-Developer</title>
+    <link rel="stylesheet" href="css/editor.css">
+    <link rel="stylesheet" href="css/icons.css">
+</head>
+<body>
+
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="banner-content">
+            <div class="banner-logo">
+                <span class="logo-symbol">{<span class="logo-letter">K</span>}</span>
+                <div class="logo-text">
+                    <span class="logo-title">K - Editor</span>
+                    <span class="logo-subtitle">Koshey Developer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="editor-wrapper">
+        <div class="editor-container">
+            <!-- Toolbar -->
+            <div class="toolbar" id="toolbar">
+                <div class="toolbar-group">
+                    <button class="toolbar-btn" data-command="undo" title="Отменить (Ctrl+Z)"></button>
+                    <button class="toolbar-btn" data-command="redo" title="Повторить (Ctrl+Y)"></button>
+                </div>
+
+                <div class="toolbar-divider"></div>
+
+                <div class="toolbar-group">
+                    <select class="toolbar-select" id="formatBlock" title="Формат">
+                        <option value="p">Обычный</option>
+                        <option value="h1">H1</option>
+                        <option value="h2">H2</option>
+                        <option value="h3">H3</option>
+                        <option value="h4">H4</option>
+                        <option value="blockquote">Цитата</option>
+                        <option value="pre">Код</option>
+                    </select>
+                </div>
+
+                <div class="toolbar-divider"></div>
+
+                <div class="toolbar-group">
+                    <select class="toolbar-select" id="fontSize" title="Размер шрифта">
+                        <option value="1">Мал</option>
+                        <option value="3" selected>Норм</option>
+                        <option value="5">Больш</option>
+                        <option value="7">Огромн</option>
+                    </select>
+                </div>
+
+                <div class="toolbar-divider"></div>
+
+                <div class="toolbar-group">
+                    <button class="toolbar-btn" data-command="bold" title="Жирный (Ctrl+B)"></button>
+                    <button class="toolbar-btn" data-command="italic" title="Курсив (Ctrl+I)"></button>
+                    <button class="toolbar-btn" data-command="underline" title="Подчёркнутый (Ctrl+U)"></button>
+                    <button class="toolbar-btn" data-command="strikeThrough" title="Зачёркнутый"></button>
+                </div>
+
+                <div class="toolbar-divider"></div>
+
+                <div class="toolbar-group">
+                    <input type="color" class="toolbar-color" id="foreColor" value="#4ade80" title="Цвет текста">
+                    <input type="color" class="toolbar-color" id="hiliteColor" value="#fbbf24" title="Цвет фона">
+                </div>
+
+                <div class="toolbar-divider"></div>
+
+                <div class="toolbar-group">
+                    <button class="toolbar-btn" data-command="justifyLeft" title="По левому краю"></button>
+                    <button class="toolbar-btn" data-command="justifyCenter" title="По центру"></button>
+                    <button class="toolbar-btn" data-command="justifyRight" title="По правому краю"></button>
+                    <button class="toolbar-btn" data-command="justifyFull" title="По ширине"></button>
+                </div>
+
+                <div class="toolbar-divider"></div>
+
+                <div class="toolbar-group">
+                    <button class="toolbar-btn" data-command="insertUnorderedList" title="Маркированный список"></button>
+                    <button class="toolbar-btn" data-command="insertOrderedList" title="Нумерованный список"></button>
+                    <button class="toolbar-btn" data-command="indent" title="Увеличить отступ"></button>
+                    <button class="toolbar-btn" data-command="outdent" title="Уменьшить отступ"></button>
+                </div>
+
+                <div class="toolbar-divider"></div>
+
+                <div class="toolbar-group">
+                    <button class="toolbar-btn" id="btnLink" title="Ссылка (Ctrl+K)"><span class="btn-icon"></span></button>
+                    <button class="toolbar-btn" id="btnUnlink" title="Убрать ссылку"><span class="btn-icon"></span></button>
+                    <button class="toolbar-btn" id="btnImage" title="Картинка"><span class="btn-icon"></span></button>
+                    <button class="toolbar-btn" id="btnVideo" title="Видео"><span class="btn-icon"></span></button>
+                    <button class="toolbar-btn" id="btnTable" title="Таблица"><span class="btn-icon"></span></button>
+                    <button class="toolbar-btn" id="btnHR" title="Линия"><span class="btn-icon"></span></button>
+                    <button class="toolbar-btn" id="btnCode" title="Код"><span class="btn-icon"></span></button>
+                    <button class="toolbar-btn" id="btnUpload" title="Загрузить файл"><span class="btn-icon"></span></button>
+                    <button class="toolbar-btn" id="btnSmile" title="Смайлики"><span class="btn-icon"></span></button>
+                    <button class="toolbar-btn" id="btnWidget" title="Виджет (JSON-блок)"><span class="btn-icon"></span></button>
+                </div>
+
+                <div class="toolbar-divider"></div>
+
+                <div class="toolbar-group">
+                    <button class="toolbar-btn" id="btnFullscreen" title="Полный экран (F11)"><span class="btn-icon"></span></button>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="editor-tabs">
+                <button class="tab active" data-tab="editor">
+                    <span class="tab-icon"></span> Редактор
+                </button>
+                <button class="tab" data-tab="preview">
+                    <span class="tab-icon"></span> Предпросмотр
+                </button>
+                <button class="tab" data-tab="html">
+                    <span class="tab-icon"></span> HTML
+                </button>
+            </div>
+
+            <!-- Editor Area -->
+            <div class="editor-content" id="editorContent">
+                <div class="tab-content active" id="tabEditor">
+                    <div class="editor-area" id="editor" contenteditable="true" spellcheck="true">
+                        <p>Начните вводить текст здесь...</p>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="tabPreview">
+                    <div class="preview-area" id="preview"></div>
+                </div>
+
+                <div class="tab-content" id="tabHtml">
+                    <textarea class="html-area" id="htmlArea" placeholder="HTML код..."></textarea>
+                </div>
+            </div>
+
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div class="status-left">
+                    <span class="status-item">
+                        <span class="status-icon"></span> Слов: <span id="wordCount">0</span>
+                    </span>
+                    <span class="status-item">
+                        <span class="status-icon"></span> Символов: <span id="charCount">0</span>
+                    </span>
+                </div>
+                <div class="status-right">
+                    <span class="status-item" id="statusMessage">Готов</span>
+                </div>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="editor-actions-bottom">
+                <button class="btn-action btn-save-action" id="btnSave" title="Сохранить (Ctrl+S)">
+                    Сохранить
+                </button>
+                <button class="btn-action btn-clear-action" id="btnClear" title="Очистить">
+                    Очистить
+                </button>
+                <a href="demo/" class="btn-action btn-demo-action" title="Просмотр сохранённых записей">
+                    Просмотр
+                </a>
+                <a href="docs.html" class="btn-action btn-docs-action" title="Описание и документация">
+                    Описание
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download section -->
+    <div class="download-section">
+        <a href="keditor.zip" download class="btn-download">
+            <span class="dl-icon">&#11015;</span> Скачать K-Editor
+            <span class="dl-size">ZIP-архив</span>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="editor-footer">
+        <div class="footer-content">
+            <a href="https://kosheydemo.info" target="_blank" rel="noopener" class="footer-link">Koshey-Developer</a>
+            <span class="footer-copy">&copy; 2011-2026. Все права защищены.</span>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Вставить ссылку</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalCancel">Отмена</button>
+                <button class="btn btn-primary" id="modalOk">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div class="modal-overlay" id="uploadOverlay">
+        <div class="modal" id="uploadModal">
+            <div class="modal-header">
+                <h3 class="modal-title">Загрузка файлов</h3>
+                <button class="modal-close" id="uploadClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon"></div>
+                    <p>Перетащите файлы сюда или нажмите для выбора</p>
+                    <p class="upload-hint">Макс. 5MB • JPG, PNG, GIF, PDF, DOC, TXT</p>
+                    <input type="file" id="fileInput" multiple accept="image/*,.pdf,.doc,.docx,.txt" style="display:none">
+                </div>
+                <div class="file-preview" id="filePreview"></div>
+                <div class="file-list" id="fileList"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="uploadCancelBtn">Закрыть</button>
+                <button class="btn btn-primary" id="uploadInsertBtn">Вставить выбранные</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Smileys Panel -->
+    <div class="smileys-panel" id="smileysPanel">
+        <div class="smileys-grid" id="smileysGrid"></div>
+    </div>
+
+    <!-- Widget Modal -->
+    <div class="modal-overlay" id="widgetOverlay">
+        <div class="modal widget-modal" id="widgetModal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="widgetTitle">Вставить виджет</h3>
+                <button class="modal-close" id="widgetClose">&times;</button>
+            </div>
+            <div class="modal-body" id="widgetBody">
+                <div class="widget-picker" id="widgetPicker"></div>
+                <div class="widget-form" id="widgetForm" style="display:none"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="widgetCancelBtn">Отмена</button>
+                <button class="btn btn-secondary" id="widgetBackBtn" style="display:none">Назад</button>
+                <button class="btn btn-primary" id="widgetInsertBtn" style="display:none">Вставить</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/widget-renderer.js"></script>
+    <script src="js/editor.js"></script>
+</body>
+</html>

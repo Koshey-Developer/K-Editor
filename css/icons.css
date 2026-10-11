@@ -1,0 +1,78 @@
+/* K-Editor Icons — CSS-only, no external fonts */
+
+/* Toolbar command buttons — text/symbol icons */
+.toolbar-btn[data-command="undo"]::after { content: '↩'; font-size: 12px; }
+.toolbar-btn[data-command="redo"]::after { content: '↪'; font-size: 12px; }
+.toolbar-btn[data-command="bold"]::after { content: 'B'; font-weight: 900; font-size: 11px; }
+.toolbar-btn[data-command="italic"]::after { content: 'I'; font-style: italic; font-size: 11px; }
+.toolbar-btn[data-command="underline"]::after { content: 'U'; text-decoration: underline; font-size: 11px; }
+.toolbar-btn[data-command="strikeThrough"]::after { content: 'S'; text-decoration: line-through; font-size: 11px; }
+.toolbar-btn[data-command="justifyLeft"]::after { content: '≡'; font-size: 11px; letter-spacing: -1px; }
+.toolbar-btn[data-command="justifyCenter"]::after { content: '≡'; font-size: 11px; letter-spacing: -1px; }
+.toolbar-btn[data-command="justifyRight"]::after { content: '≡'; font-size: 11px; letter-spacing: -1px; }
+.toolbar-btn[data-command="justifyFull"]::after { content: '≡'; font-size: 11px; letter-spacing: -1px; }
+.toolbar-btn[data-command="insertUnorderedList"]::after { content: '•‥'; font-size: 9px; letter-spacing: -2px; }
+.toolbar-btn[data-command="insertOrderedList"]::after { content: '1.'; font-size: 10px; }
+.toolbar-btn[data-command="indent"]::after { content: '→'; font-size: 11px; }
+.toolbar-btn[data-command="outdent"]::after { content: '←'; font-size: 11px; }
+
+/* Button icon container */
+.btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Special button icons via data attribute */
+#btnLink .btn-icon::after { content: '🔗'; font-size: 10px; }
+#btnUnlink .btn-icon::after { content: '⛓'; font-size: 10px; }
+#btnImage .btn-icon::after { content: '🖼'; font-size: 10px; }
+#btnVideo .btn-icon::after { content: '▶'; font-size: 9px; }
+#btnTable .btn-icon::after { content: '⊞'; font-size: 11px; }
+#btnHR .btn-icon::after { content: '—'; font-size: 11px; font-weight: 700; }
+#btnCode .btn-icon::after { content: '</>'; font-size: 8px; font-family: monospace; font-weight: 700; }
+#btnSmile .btn-icon::after { content: '☺'; font-size: 11px; }
+#btnUpload .btn-icon::after { content: '📎'; font-size: 10px; }
+#btnWidget .btn-icon::after { content: '⚙'; font-size: 12px; }
+#btnFullscreen .btn-icon::after { content: '⛶'; font-size: 11px; }
+
+/* Tab icons */
+.tab[data-tab="editor"] .tab-icon::after { content: '✏'; font-size: 11px; }
+.tab[data-tab="preview"] .tab-icon::after { content: '👁'; font-size: 11px; }
+.tab[data-tab="html"] .tab-icon::after { content: '<>'; font-size: 9px; font-family: monospace; font-weight: 700; }
+
+.tab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Status bar icons */
+.status-item .status-icon::after { content: '📊'; font-size: 11px; }
+.status-item:nth-child(1) .status-icon::after { content: '📝'; }
+.status-item:nth-child(2) .status-icon::after { content: '🔤'; }
+
+.status-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Header icons */
+.editor-title .title-icon::after { content: '✒'; font-size: 14px; color: var(--gold); }
+.title-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Upload area icon */
+.upload-icon::after { content: '📁'; font-size: 2.5rem; }
+.upload-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
